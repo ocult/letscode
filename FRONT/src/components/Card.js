@@ -18,6 +18,8 @@ const CardContainer = styled.li`
     margin:5px;
     background-color:white;
     box-shadow: 0 0 5px rgba(0,0,0,.2);
+    max-height: 350px;
+    min-height: 100px;
 `;
 
 const CardHeader = styled.div`
