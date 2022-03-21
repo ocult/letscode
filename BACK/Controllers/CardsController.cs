@@ -12,6 +12,7 @@ namespace LetsCode.Controllers;
 
 [Route("cards")]
 [ApiController]
+[Authorize(MyJwtConstants.DEFAULT_POLICY)]
 public class CardsController : ControllerBase
 {
     private readonly CardContext _context;
@@ -87,7 +88,6 @@ public class CardsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [Authorize(MyJwtConstants.DEFAULT_POLICY)]
     public async Task<ActionResult<CardDTO>> PostCard(CreateCardDTO createCardDTO)
     {
         var validator = new CreateCardDtoValidator();
