@@ -37,13 +37,10 @@ public static class JwtTokenService
         var claimsIdentity = principal.Identity as ClaimsIdentity;
         if (claimsIdentity != null)
         {
-            //if (claimsIdentity.HasClaim(ClaimTypes.Role, "AdminRoleNameFromToken"))
-            //{
             if (!claimsIdentity.HasClaim(ClaimTypes.Role, MyJwtConstants.DEFAULT_ROLE))
             {
                 claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, MyJwtConstants.DEFAULT_ROLE));
             }
-            //}
         }
     }
 }

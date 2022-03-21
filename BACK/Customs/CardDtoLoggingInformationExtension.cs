@@ -3,7 +3,7 @@ using LetsCode.Models;
 
 namespace LetsCode.Customs;
 
-public static class CardDtoLoggingInformationExtension 
+public static class CardDtoLoggingInformationExtension
 {
     public static void LogCardChanged(this ILogger<CardsController> logger, Card card) => LogCard(logger, card, "Alterado");
 

@@ -13,14 +13,14 @@ public class LoginController : ControllerBase
 {
     public string privateKey = MyJwtConstants.DEFAULT_KEY;
 
-    public LoginController(IConfiguration configuration) 
+    public LoginController(IConfiguration configuration)
     {
         privateKey = configuration[MyJwtConstants.CONFIG] ?? MyJwtConstants.DEFAULT_KEY;
     }
 
     [HttpPost]
     [AllowAnonymous]
-    public async Task<ActionResult<string>> Authenticate([FromBody]AuthenticationRequest model)
+    public async Task<ActionResult<string>> Authenticate([FromBody] AuthenticationRequest model)
     {
         var user = UserRepository.Get(model.Username, model.Password);
 
@@ -28,7 +28,7 @@ public class LoginController : ControllerBase
         {
             return NotFound(new { message = "Usuário ou senha inválidos" });
         }
-            
+
         var token = JwtTokenService.GenerateToken(user, privateKey);
 
         return token;

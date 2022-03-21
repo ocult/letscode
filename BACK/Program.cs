@@ -1,18 +1,17 @@
-using LetsCode.Models;
+
+using System.Net;
 using LetsCode.Customs;
-using Microsoft.EntityFrameworkCore;
+using LetsCode.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Net;
-using System.IdentityModel.Tokens.Jwt;
-using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddDbContext<CardContext>(opt => opt.UseInMemoryDatabase("LetsCode"));
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Logging.ClearProviders();
 builder.Logging.AddReduceFormatter(options => options.TimestampFormat = "dd/MM/yyyy HH:mm:ss");
@@ -44,7 +43,6 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddLogging();
 
-// Add services to the container.
 builder.Services
     .AddAuthentication(options =>
     {
@@ -64,9 +62,7 @@ builder.Services
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(privateKey),
             ValidateIssuer = false,
-            //ValidIssuer = issuer
             ValidateAudience = false,
-            //ValidAudience = audience,
             ClockSkew = TimeSpan.Zero
         };
     });
@@ -82,7 +78,6 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();

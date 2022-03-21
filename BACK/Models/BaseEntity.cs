@@ -6,7 +6,7 @@ public abstract class BaseEntity
     {
         Id = Guid.NewGuid();
     }
-    
+
     protected BaseEntity(Guid id)
     {
         Id = id;
