@@ -83,6 +83,12 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors(builder => 
+    {
+        builder.SetIsOriginAllowed(origin => new Uri(origin).IsLoopback);
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+    });
 }
 
 app.UseHttpsRedirection();

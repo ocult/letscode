@@ -22,7 +22,7 @@ public class LoginController : ControllerBase
     [AllowAnonymous]
     public async Task<ActionResult<string>> Authenticate([FromBody] AuthenticationRequest model)
     {
-        var user = UserRepository.Get(model.Username, model.Password);
+        var user = UserRepository.Get(model.Login, model.Senha);
 
         if (user == null)
         {

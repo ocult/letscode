@@ -70,7 +70,7 @@ public class CardsController : ControllerBase
         {
             return NotFound();
         }
-        card.Update(cardDTO.Title, cardDTO.Content, Enum.Parse<KanbanListEnum>(cardDTO.List.ToUpperInvariant()));
+        card.Update(cardDTO.Titulo, cardDTO.Conteudo, Enum.Parse<KanbanListEnum>(cardDTO.Lista.ToUpperInvariant()));
 
         try
         {
@@ -99,7 +99,7 @@ public class CardsController : ControllerBase
             return BadRequest(results.Errors);
         }
 
-        var card = new Card(createCardDTO.Title, createCardDTO.Content);
+        var card = new Card(createCardDTO.Titulo, createCardDTO.Conteudo);
         _context.Cards.Add(card);
         await _context.SaveChangesAsync();
 
@@ -134,9 +134,9 @@ public class CardsController : ControllerBase
         return new CardDTO
         {
             Id = card.Id,
-            Title = card.Title,
-            Content = card.Content,
-            List = card.List.ToString()
+            Titulo = card.Title,
+            Conteudo = card.Content,
+            Lista = card.List.ToString()
         };
     }
 }
